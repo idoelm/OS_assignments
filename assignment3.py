@@ -14,7 +14,7 @@ def secondFunction(num :int, queue_to_process: multiprocessing.Queue):
 
 def main():
     queue_to_process = multiprocessing.Queue()
-    num = 5
+    num = 3
     print("The PID of main: " + str(os.getpid()) + " and the PID of parent: " + str(os.getppid()))
     process = multiprocessing.Process(target = secondFunction, args = (num, queue_to_process))
     process.start()
