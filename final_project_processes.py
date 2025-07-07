@@ -9,7 +9,6 @@ def getJsonFromLink(link, queue_counter, counter):
 
 def main():
     queue = multiprocessing.Queue()
-    queues = []
     sum = 0
     proc = []
     links = ['https://jsonplaceholder.typicode.com/posts',
@@ -23,12 +22,11 @@ def main():
         process = multiprocessing.Process(target = getJsonFromLink, args = (link, queue,counter, ))
         process.start()
         proc.append(process)
-        queues.append(queue)
     
     for i in proc:
         i.join()
 
-    for i in queues:
+    while not queue.empty():
         sum += queue.get()
 
     print("Total number of chars downloaded is " + str(sum))
